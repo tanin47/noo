@@ -1,0 +1,630 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F32C935E24778484007B1F26 /* NooCGEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C935D24778484007B1F26 /* NooCGEvent.swift */; };
+		F3383A3D23BD172A00EECE6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3383A3C23BD172A00EECE6C /* Assets.xcassets */; };
+		F3383A6A23BD42A000EECE6C /* FontAwesome-Solid.otf in Resources */ = {isa = PBXBuildFile; fileRef = F3383A6923BD42A000EECE6C /* FontAwesome-Solid.otf */; };
+		F377AF9324739FB600175F1A /* EventLoopTriggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F377AF9224739FB600175F1A /* EventLoopTriggerTests.swift */; };
+		F3832BE72471C1FE00ACF791 /* ShortcutEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3832BE62471C1FE00ACF791 /* ShortcutEditor.swift */; };
+		F3832BE92472096A00ACF791 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3832BE82472096A00ACF791 /* Config.swift */; };
+		F3AE0C7D245936F1005C7FEF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AE0C7B245936F1005C7FEF /* SettingsViewController.swift */; };
+		F3B80EA124566276007431E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B80EA024566276007431E6 /* AppDelegate.swift */; };
+		F3B80EA3245662E0007431E6 /* EventLoop.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B80EA2245662E0007431E6 /* EventLoop.swift */; };
+		F3B80EA724567AA6007431E6 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B80EA624567AA6007431E6 /* main.swift */; };
+		F3E29B652478C93A0098AE9A /* EventLoopRespondToTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E29B642478C93A0098AE9A /* EventLoopRespondToTests.swift */; };
+		F3E29B672478CA4C0098AE9A /* EventLoopEventCallBackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E29B662478CA4C0098AE9A /* EventLoopEventCallBackTests.swift */; };
+		F3E29B692478CCC40098AE9A /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E29B682478CCC40098AE9A /* Mocks.swift */; };
+		F3E29B6B2478E8A50098AE9A /* NooUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E29B6A2478E8A50098AE9A /* NooUITests.swift */; };
+		F3E29B6E2479D2460098AE9A /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3832BE82472096A00ACF791 /* Config.swift */; };
+		F3E29B732479EC2F0098AE9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3E29B722479EC2F0098AE9A /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F3383A4A23BD172B00EECE6C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F3383A2E23BD172A00EECE6C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F3383A3523BD172A00EECE6C;
+			remoteInfo = mouse;
+		};
+		F3383A5523BD172B00EECE6C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F3383A2E23BD172A00EECE6C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F3383A3523BD172A00EECE6C;
+			remoteInfo = mouse;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F32C935D24778484007B1F26 /* NooCGEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NooCGEvent.swift; sourceTree = "<group>"; };
+		F3383A3623BD172A00EECE6C /* Noo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Noo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3383A3C23BD172A00EECE6C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F3383A4123BD172B00EECE6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F3383A4423BD172B00EECE6C /* Noo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Noo.entitlements; sourceTree = "<group>"; };
+		F3383A4923BD172B00EECE6C /* NooTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NooTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3383A4F23BD172B00EECE6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F3383A5423BD172B00EECE6C /* NooUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NooUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3383A5A23BD172B00EECE6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F3383A6923BD42A000EECE6C /* FontAwesome-Solid.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FontAwesome-Solid.otf"; sourceTree = "<group>"; };
+		F377AF9224739FB600175F1A /* EventLoopTriggerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventLoopTriggerTests.swift; sourceTree = "<group>"; };
+		F3832BE62471C1FE00ACF791 /* ShortcutEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutEditor.swift; sourceTree = "<group>"; };
+		F3832BE82472096A00ACF791 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		F3AE0C7B245936F1005C7FEF /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		F3B80EA024566276007431E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F3B80EA2245662E0007431E6 /* EventLoop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventLoop.swift; sourceTree = "<group>"; };
+		F3B80EA624567AA6007431E6 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		F3E29B642478C93A0098AE9A /* EventLoopRespondToTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventLoopRespondToTests.swift; sourceTree = "<group>"; };
+		F3E29B662478CA4C0098AE9A /* EventLoopEventCallBackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventLoopEventCallBackTests.swift; sourceTree = "<group>"; };
+		F3E29B682478CCC40098AE9A /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
+		F3E29B6A2478E8A50098AE9A /* NooUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NooUITests.swift; sourceTree = "<group>"; };
+		F3E29B722479EC2F0098AE9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F3383A3323BD172A00EECE6C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3383A4623BD172B00EECE6C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3383A5123BD172B00EECE6C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F3383A2D23BD172A00EECE6C = {
+			isa = PBXGroup;
+			children = (
+				F3383A3823BD172A00EECE6C /* Noo */,
+				F3383A4C23BD172B00EECE6C /* NooTests */,
+				F3383A5723BD172B00EECE6C /* NooUITests */,
+				F3383A3723BD172A00EECE6C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F3383A3723BD172A00EECE6C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F3383A3623BD172A00EECE6C /* Noo.app */,
+				F3383A4923BD172B00EECE6C /* NooTests.xctest */,
+				F3383A5423BD172B00EECE6C /* NooUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F3383A3823BD172A00EECE6C /* Noo */ = {
+			isa = PBXGroup;
+			children = (
+				F3E29B722479EC2F0098AE9A /* Assets.xcassets */,
+				F3383A6623BD3FBD00EECE6C /* fonts */,
+				F3B80EA024566276007431E6 /* AppDelegate.swift */,
+				F3B80EA2245662E0007431E6 /* EventLoop.swift */,
+				F3383A3C23BD172A00EECE6C /* Assets.xcassets */,
+				F3383A4123BD172B00EECE6C /* Info.plist */,
+				F3383A4423BD172B00EECE6C /* Noo.entitlements */,
+				F3B80EA624567AA6007431E6 /* main.swift */,
+				F3AE0C7B245936F1005C7FEF /* SettingsViewController.swift */,
+				F3832BE62471C1FE00ACF791 /* ShortcutEditor.swift */,
+				F3832BE82472096A00ACF791 /* Config.swift */,
+				F32C935D24778484007B1F26 /* NooCGEvent.swift */,
+			);
+			path = Noo;
+			sourceTree = "<group>";
+		};
+		F3383A4C23BD172B00EECE6C /* NooTests */ = {
+			isa = PBXGroup;
+			children = (
+				F3383A4F23BD172B00EECE6C /* Info.plist */,
+				F377AF9224739FB600175F1A /* EventLoopTriggerTests.swift */,
+				F3E29B642478C93A0098AE9A /* EventLoopRespondToTests.swift */,
+				F3E29B662478CA4C0098AE9A /* EventLoopEventCallBackTests.swift */,
+				F3E29B682478CCC40098AE9A /* Mocks.swift */,
+			);
+			path = NooTests;
+			sourceTree = "<group>";
+		};
+		F3383A5723BD172B00EECE6C /* NooUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F3383A5A23BD172B00EECE6C /* Info.plist */,
+				F3E29B6A2478E8A50098AE9A /* NooUITests.swift */,
+			);
+			path = NooUITests;
+			sourceTree = "<group>";
+		};
+		F3383A6623BD3FBD00EECE6C /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				F3383A6923BD42A000EECE6C /* FontAwesome-Solid.otf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F3383A3523BD172A00EECE6C /* Noo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F3383A5D23BD172B00EECE6C /* Build configuration list for PBXNativeTarget "Noo" */;
+			buildPhases = (
+				F3383A3223BD172A00EECE6C /* Sources */,
+				F3383A3323BD172A00EECE6C /* Frameworks */,
+				F3383A3423BD172A00EECE6C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Noo;
+			productName = mouse;
+			productReference = F3383A3623BD172A00EECE6C /* Noo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F3383A4823BD172B00EECE6C /* NooTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F3383A6023BD172B00EECE6C /* Build configuration list for PBXNativeTarget "NooTests" */;
+			buildPhases = (
+				F3383A4523BD172B00EECE6C /* Sources */,
+				F3383A4623BD172B00EECE6C /* Frameworks */,
+				F3383A4723BD172B00EECE6C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F3383A4B23BD172B00EECE6C /* PBXTargetDependency */,
+			);
+			name = NooTests;
+			productName = mouseTests;
+			productReference = F3383A4923BD172B00EECE6C /* NooTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F3383A5323BD172B00EECE6C /* NooUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F3383A6323BD172B00EECE6C /* Build configuration list for PBXNativeTarget "NooUITests" */;
+			buildPhases = (
+				F3383A5023BD172B00EECE6C /* Sources */,
+				F3383A5123BD172B00EECE6C /* Frameworks */,
+				F3383A5223BD172B00EECE6C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F3383A5623BD172B00EECE6C /* PBXTargetDependency */,
+			);
+			name = NooUITests;
+			productName = mouseUITests;
+			productReference = F3383A5423BD172B00EECE6C /* NooUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F3383A2E23BD172A00EECE6C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1120;
+				ORGANIZATIONNAME = "Tanin Na Nakorn";
+				TargetAttributes = {
+					F3383A3523BD172A00EECE6C = {
+						CreatedOnToolsVersion = 11.2.1;
+						LastSwiftMigration = 1120;
+					};
+					F3383A4823BD172B00EECE6C = {
+						CreatedOnToolsVersion = 11.2.1;
+						LastSwiftMigration = 1120;
+						TestTargetID = F3383A3523BD172A00EECE6C;
+					};
+					F3383A5323BD172B00EECE6C = {
+						CreatedOnToolsVersion = 11.2.1;
+						LastSwiftMigration = 1120;
+						TestTargetID = F3383A3523BD172A00EECE6C;
+					};
+				};
+			};
+			buildConfigurationList = F3383A3123BD172A00EECE6C /* Build configuration list for PBXProject "Noo" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F3383A2D23BD172A00EECE6C;
+			productRefGroup = F3383A3723BD172A00EECE6C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F3383A3523BD172A00EECE6C /* Noo */,
+				F3383A4823BD172B00EECE6C /* NooTests */,
+				F3383A5323BD172B00EECE6C /* NooUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F3383A3423BD172A00EECE6C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3383A6A23BD42A000EECE6C /* FontAwesome-Solid.otf in Resources */,
+				F3E29B732479EC2F0098AE9A /* Assets.xcassets in Resources */,
+				F3383A3D23BD172A00EECE6C /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3383A4723BD172B00EECE6C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3383A5223BD172B00EECE6C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F3383A3223BD172A00EECE6C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3832BE72471C1FE00ACF791 /* ShortcutEditor.swift in Sources */,
+				F3B80EA124566276007431E6 /* AppDelegate.swift in Sources */,
+				F3B80EA3245662E0007431E6 /* EventLoop.swift in Sources */,
+				F3B80EA724567AA6007431E6 /* main.swift in Sources */,
+				F3AE0C7D245936F1005C7FEF /* SettingsViewController.swift in Sources */,
+				F3832BE92472096A00ACF791 /* Config.swift in Sources */,
+				F32C935E24778484007B1F26 /* NooCGEvent.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3383A4523BD172B00EECE6C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F377AF9324739FB600175F1A /* EventLoopTriggerTests.swift in Sources */,
+				F3E29B672478CA4C0098AE9A /* EventLoopEventCallBackTests.swift in Sources */,
+				F3E29B652478C93A0098AE9A /* EventLoopRespondToTests.swift in Sources */,
+				F3E29B692478CCC40098AE9A /* Mocks.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3383A5023BD172B00EECE6C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3E29B6B2478E8A50098AE9A /* NooUITests.swift in Sources */,
+				F3E29B6E2479D2460098AE9A /* Config.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F3383A4B23BD172B00EECE6C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F3383A3523BD172A00EECE6C /* Noo */;
+			targetProxy = F3383A4A23BD172B00EECE6C /* PBXContainerItemProxy */;
+		};
+		F3383A5623BD172B00EECE6C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F3383A3523BD172A00EECE6C /* Noo */;
+			targetProxy = F3383A5523BD172B00EECE6C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		F3383A5B23BD172B00EECE6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+			};
+			name = Debug;
+		};
+		F3383A5C23BD172B00EECE6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		F3383A5E23BD172B00EECE6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Noo/Noo.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = S6482XAL5E;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = Noo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = tanin.noo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		F3383A5F23BD172B00EECE6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Noo/Noo.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = S6482XAL5E;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = Noo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = tanin.noo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		F3383A6123BD172B00EECE6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = QQ6ZV8G8L5;
+				INFOPLIST_FILE = NooTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = tanin.noo.NooTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Noo.app/Contents/MacOS/Noo";
+			};
+			name = Debug;
+		};
+		F3383A6223BD172B00EECE6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = QQ6ZV8G8L5;
+				INFOPLIST_FILE = NooTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = tanin.noo.NooTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Noo.app/Contents/MacOS/Noo";
+			};
+			name = Release;
+		};
+		F3383A6423BD172B00EECE6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = QQ6ZV8G8L5;
+				INFOPLIST_FILE = NooUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = tanin.noo.NooUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = Noo;
+			};
+			name = Debug;
+		};
+		F3383A6523BD172B00EECE6C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = QQ6ZV8G8L5;
+				INFOPLIST_FILE = NooUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = tanin.noo.NooUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = Noo;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F3383A3123BD172A00EECE6C /* Build configuration list for PBXProject "Noo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3383A5B23BD172B00EECE6C /* Debug */,
+				F3383A5C23BD172B00EECE6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F3383A5D23BD172B00EECE6C /* Build configuration list for PBXNativeTarget "Noo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3383A5E23BD172B00EECE6C /* Debug */,
+				F3383A5F23BD172B00EECE6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F3383A6023BD172B00EECE6C /* Build configuration list for PBXNativeTarget "NooTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3383A6123BD172B00EECE6C /* Debug */,
+				F3383A6223BD172B00EECE6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F3383A6323BD172B00EECE6C /* Build configuration list for PBXNativeTarget "NooUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3383A6423BD172B00EECE6C /* Debug */,
+				F3383A6523BD172B00EECE6C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F3383A2E23BD172A00EECE6C /* Project object */;
+}
