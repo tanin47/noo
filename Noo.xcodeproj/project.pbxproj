@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		F32C935E24778484007B1F26 /* NooCGEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C935D24778484007B1F26 /* NooCGEvent.swift */; };
-		F3383A3D23BD172A00EECE6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3383A3C23BD172A00EECE6C /* Assets.xcassets */; };
 		F3383A6A23BD42A000EECE6C /* FontAwesome-Solid.otf in Resources */ = {isa = PBXBuildFile; fileRef = F3383A6923BD42A000EECE6C /* FontAwesome-Solid.otf */; };
 		F377AF9324739FB600175F1A /* EventLoopTriggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F377AF9224739FB600175F1A /* EventLoopTriggerTests.swift */; };
 		F3832BE72471C1FE00ACF791 /* ShortcutEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3832BE62471C1FE00ACF791 /* ShortcutEditor.swift */; };
@@ -222,7 +221,7 @@
 		F3383A2E23BD172A00EECE6C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1120;
+				LastUpgradeCheck = 1220;
 				ORGANIZATIONNAME = "Tanin Na Nakorn";
 				TargetAttributes = {
 					F3383A3523BD172A00EECE6C = {
@@ -268,7 +267,6 @@
 			files = (
 				F3383A6A23BD42A000EECE6C /* FontAwesome-Solid.otf in Resources */,
 				F3E29B732479EC2F0098AE9A /* Assets.xcassets in Resources */,
-				F3383A3D23BD172A00EECE6C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,6 +363,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -392,7 +391,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 			};
@@ -424,6 +423,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -447,6 +447,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
 			};
 			name = Release;
 		};
