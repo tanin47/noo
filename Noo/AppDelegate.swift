@@ -89,7 +89,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         item.menu!.addItem(withTitle: "Settings", action: #selector(showSettings), keyEquivalent: "")
         item.menu!.addItem(withTitle: "Hide this menu", action: #selector(hide), keyEquivalent: "")
         item.menu!.addItem(NSMenuItem.separator())
-        item.menu!.addItem(withTitle: "Exit", action: #selector(terminate), keyEquivalent: "")
+        item.menu!.addItem(withTitle: "Quit", action: #selector(terminate), keyEquivalent: "")
         statusItem = item;
     }
     
