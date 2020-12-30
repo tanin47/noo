@@ -1,6 +1,8 @@
 Noo
 ----
 
+[![Download from Mac App Store](./download-button.svg)](https://apps.apple.com/us/app/noo-mouse/id1514904040)
+
 Noo allows you to map mouse buttons and multi-touch gestures to any combination of keys.
 
 ![screenshot](./screenshot.png)
