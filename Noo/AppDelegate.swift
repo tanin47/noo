@@ -8,14 +8,17 @@
 
 import Cocoa
 
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     
     static let CONFIG = Config()
+    static let controller: SettingsViewController = SettingsViewController()
     
     var statusItem: NSStatusItem?;
     let window: NSWindow;
     
     override init() {
+        NSLog("Init Noo.app")
+        
         self.window = NSWindow.init(
             contentRect: NSRect.init(x: 0, y: 0, width: 10, height: 10),
             styleMask: NSWindow.StyleMask.init(arrayLiteral: NSWindow.StyleMask.closable, NSWindow.StyleMask.resizable, NSWindow.StyleMask.miniaturizable, NSWindow.StyleMask.titled),
@@ -26,15 +29,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         super.init()
         
-        window.contentViewController = SettingsViewController()
+        
+        window.contentViewController = AppDelegate.controller
+        window.title = "Noo"
+        window.delegate = AppDelegate.controller
     }
     
     @objc func showSettings() {
+        NSApp.setActivationPolicy(.regular)
         NSApp.activate(ignoringOtherApps: true)
         window.center()
         window.makeKeyAndOrderFront(self)
         window.setIsVisible(true)
     }
+
     
     @objc func terminate() {
         NSApp.terminate(nil)
@@ -67,7 +75,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         if eventTap == nil {
             NSLog("Unable to invoke CGEvent.tapCreate. Please enable Accessibility for Noo.app");
-            NSApp.terminate(nil)
+//            NSApp.terminate(nil)
+            return
         }
         
         eventLoop = CFMachPortCreateRunLoopSource(nil, eventTap!, 0)
@@ -78,7 +87,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func setupStatusItem() {
         let item = NSStatusBar.system.statusItem(withLength: 25)
-        item.isVisible = true;
+        item.isVisible = true
         
         item.button!.cell!.font = NSFont.init(name: "Font Awesome 5 Free", size: 14)
         
@@ -90,17 +99,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         item.menu!.addItem(withTitle: "Hide this menu", action: #selector(hide), keyEquivalent: "")
         item.menu!.addItem(NSMenuItem.separator())
         item.menu!.addItem(withTitle: "Quit", action: #selector(terminate), keyEquivalent: "")
-        statusItem = item;
+        statusItem = item
+        showSettings()
     }
     
     func applicationDidBecomeActive(_ notification: Notification) {
         // App is activated by user double-clicking on the binary.
         statusItem!.isVisible = true;
-        NSApp.activate(ignoringOtherApps: true)
+        showSettings()
     }
     
     func applicationDidFinishLaunching(_ notification: Notification) {
-        setupEventLoop()
         setupStatusItem()
+        setupEventLoop()
     }
 }

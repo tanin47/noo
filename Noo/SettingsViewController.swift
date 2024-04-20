@@ -8,8 +8,9 @@
 
 import Cocoa
 
-class SettingsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextViewDelegate {
+class SettingsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextViewDelegate, NSWindowDelegate {
     
+    var accessibilityWarningView: NSStackView
     var scrollView: NSScrollView
     var tableView: NSTableView
     var originColumn: NSTableColumn
@@ -19,7 +20,7 @@ class SettingsViewController: NSViewController, NSTableViewDataSource, NSTableVi
         "finger-3": "3-finger touch",
         "finger-4": "4-finger touch",
         "finger-5": "5-finger touch",
-        "mouse-button-right": "Right mouse button",
+        "mouse-button-right": "Mouse right button",
         "mouse-button-2": "Mouse button 2",
         "mouse-button-3": "Mouse button 3",
         "mouse-button-4": "Mouse button 4",
@@ -32,10 +33,31 @@ class SettingsViewController: NSViewController, NSTableViewDataSource, NSTableVi
     init() {
         scrollView = NSScrollView()
         tableView = NSTableView()
+        accessibilityWarningView = NSStackView()
         originColumn = NSTableColumn(identifier: NSUserInterfaceItemIdentifier("Origin"))
         shortcutColumn = NSTableColumn(identifier: NSUserInterfaceItemIdentifier("Shortcut"))
-        
         super.init(nibName: nil, bundle: nil)
+
+        let accessibilityWarningText = NSTextField()
+        accessibilityWarningView.edgeInsets = NSEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
+        accessibilityWarningView.orientation = .vertical
+        accessibilityWarningView.alignment = .centerX
+        accessibilityWarningView.wantsLayer = true
+        accessibilityWarningView.layer?.backgroundColor = NSColor(red: 0.8627, green: 0.2078, blue: 0.2705, alpha: 1.0).cgColor
+    
+        accessibilityWarningText.textColor = NSColor.white
+        accessibilityWarningText.isBezeled = false
+        accessibilityWarningText.drawsBackground = false
+        accessibilityWarningText.isEditable = false
+        accessibilityWarningText.isSelectable = true
+        accessibilityWarningText.stringValue = "You must grant Accessibility to Noo."
+        accessibilityWarningView.addArrangedSubview(accessibilityWarningText)
+        
+        let accessibilityWarningButton = NSButton(
+            title: "Click to open the Accessibility setting", target: self, action: #selector(onAccessibilityWarningButtonClicked))
+        accessibilityWarningButton.setButtonType(NSButton.ButtonType.momentaryLight)
+        accessibilityWarningButton.appearance = NSAppearance(named: .aqua)
+        accessibilityWarningView.addArrangedSubview(accessibilityWarningButton)
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.setContentCompressionResistancePriority(NSLayoutConstraint.Priority.required, for: NSLayoutConstraint.Orientation.horizontal)
@@ -69,14 +91,30 @@ class SettingsViewController: NSViewController, NSTableViewDataSource, NSTableVi
         tableView.dataSource = self;
         tableView.delegate = self;
         
-        originColumn.title = "Origin"
+        originColumn.title = "Gesture"
         originColumn.width = 130
         originColumn.headerCell.alignment = NSTextAlignment.center
-        shortcutColumn.title = "Shortcut"
+        shortcutColumn.title = "Key combination"
         shortcutColumn.headerCell.alignment = NSTextAlignment.center
         
         tableView.addTableColumn(originColumn)
         tableView.addTableColumn(shortcutColumn)
+    }
+    
+    func gestured(_ id: String) {
+        NSLog("Gestured: %@", id)
+    }
+    
+    @objc func onAccessibilityWarningButtonClicked() {
+        let accessibilityEnabled = AXIsProcessTrustedWithOptions([kAXTrustedCheckOptionPrompt.takeRetainedValue() as NSString: true] as NSDictionary);
+        NSLog("Noo can access Accessibility: %@", accessibilityEnabled ? "true" : "false");
+        let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility")!
+        NSWorkspace.shared.open(url)
+    }
+
+    @objc func windowShouldClose(_ sender: NSWindow) -> Bool {
+        NSApp.setActivationPolicy(.accessory)
+        return false
     }
     
     required init?(coder: NSCoder) {
@@ -85,11 +123,20 @@ class SettingsViewController: NSViewController, NSTableViewDataSource, NSTableVi
     
     override func loadView() {
         self.view = NSView(frame: NSRect.init(x: 0, y: 0, width: 480, height: 10))
-        self.view.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(scrollView)
+        self.view.becomeFirstResponder()
+        let view = NSStackView(views: [accessibilityWarningView, scrollView])
+        view.alignment = .centerX
+        view.orientation = .vertical
+        view.setCustomSpacing(0.0, after: accessibilityWarningView)
         
-        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[scroll]-0-|", options: [], metrics: nil, views: ["scroll": scrollView]))
-        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[scroll]-0-|", options: [], metrics: nil, views: ["scroll": scrollView]))
+        self.view.addSubview(view)
+        self.view.translatesAutoresizingMaskIntoConstraints = false
+//        self.view.addSubview(accessibilityWarningView)
+//        self.view.addSubview(scrollView)
+        
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[view]-0-|", options: [], metrics: nil, views: ["view": view]))
+//        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[warning]-0-|", options: [], metrics: nil, views: ["warning": accessibilityWarningView]))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[view]-0-|", options: [], metrics: nil, views: ["view": view]))
         
         self.view.setContentCompressionResistancePriority(NSLayoutConstraint.Priority.required, for: NSLayoutConstraint.Orientation.horizontal)
         self.view.setContentCompressionResistancePriority(NSLayoutConstraint.Priority.required, for: NSLayoutConstraint.Orientation.vertical)

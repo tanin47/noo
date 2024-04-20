@@ -88,6 +88,7 @@ func eventCallback(proxy: CGEventTapProxy, type: CGEventType, event: CGEvent, re
 
 func respondTo(_ id: String) -> Bool {
     let gestureOpt = AppDelegate.CONFIG.gestures[id]
+    AppDelegate.controller.gestured(id)
     if (gestureOpt == nil) { return false }
     let gesture = gestureOpt!
     
