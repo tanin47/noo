@@ -22,7 +22,7 @@ These mouse are great for reducing hand movement that will reduce the risk of in
 Installation
 -------------
 
-You can download a binary from [our release page](https://github.com/tanin47/noo/releases).
+You can install it from the Mac App Store: https://apps.apple.com/us/app/noo-mouse/id1514904040
 
 Noo needs access to the accessbility feature. You can grant it under "Security & Privacy".
 
