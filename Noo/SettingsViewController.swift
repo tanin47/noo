@@ -49,7 +49,7 @@ class SettingsViewController: NSViewController, NSTableViewDataSource, NSTableVi
         instructionText.drawsBackground = false
         instructionText.isEditable = false
         instructionText.isSelectable = true
-        instructionText.stringValue = "Click the button to identify its button number"
+        instructionText.stringValue = "Click a mouse button to identify its button number"
         instructionView.addArrangedSubview(instructionText)
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false

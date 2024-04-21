@@ -27,6 +27,9 @@ class EventLoopEventCallBackTests: XCTestCase {
         
         CGEventClass = MockCGEvent.self
         NSWorkspaceClass = MockNSWorkspace.self
+        
+        // Need to close the windows because the active window supports testing the action.
+        NSApplication.shared.keyWindow?.close()
     }
     
     override func tearDown() {
@@ -230,7 +233,7 @@ class EventLoopEventCallBackTests: XCTestCase {
         XCTAssertNil(eventCallback(proxy: CGEventTapProxy(bitPattern: 1)!, type: event.type, event: event, refcon: nil)?.takeUnretainedValue())
         XCTAssertEqual(MockNSEvent.capturedEvent, event)
         
-        RunLoop.current.run(until: NSDate.init(timeIntervalSinceNow: 0.11) as Date)
+        RunLoop.current.run(until: NSDate.init(timeIntervalSinceNow: 0.21) as Date)
         checkKeyEvent()
     }
     
@@ -281,7 +284,7 @@ class EventLoopEventCallBackTests: XCTestCase {
         RunLoop.current.run(until: NSDate.init(timeIntervalSinceNow: 0.01) as Date)
         XCTAssertNil(eventCallback(proxy: CGEventTapProxy(bitPattern: 1)!, type: eventFinger4.type, event: eventFinger4, refcon: nil)?.takeUnretainedValue())
         
-        RunLoop.current.run(until: NSDate.init(timeIntervalSinceNow: 0.11) as Date)
+        RunLoop.current.run(until: NSDate.init(timeIntervalSinceNow: 0.21) as Date)
         checkKeyEvent()
     }
     
@@ -325,12 +328,12 @@ class EventLoopEventCallBackTests: XCTestCase {
         let eventFinger4 = CGEvent.init(keyboardEventSource: nil, virtualKey: 4, keyDown: false)!
         
         XCTAssertEqual(eventFinger4, eventCallback(proxy: CGEventTapProxy(bitPattern: 1)!, type: eventFinger4.type, event: eventFinger4, refcon: nil)?.takeUnretainedValue())
-        RunLoop.current.run(until: NSDate.init(timeIntervalSinceNow: 0.11) as Date)
+        RunLoop.current.run(until: NSDate.init(timeIntervalSinceNow: 0.21) as Date)
         XCTAssertEqual(0, MockCGEvent.events.count)
         
         XCTAssertNil(eventCallback(proxy: CGEventTapProxy(bitPattern: 1)!, type: eventFinger3.type, event: eventFinger3, refcon: nil)?.takeUnretainedValue())
         
-        RunLoop.current.run(until: NSDate.init(timeIntervalSinceNow: 0.11) as Date)
+        RunLoop.current.run(until: NSDate.init(timeIntervalSinceNow: 0.21) as Date)
         checkKeyEvent()
     }
     
@@ -376,7 +379,7 @@ class EventLoopEventCallBackTests: XCTestCase {
         RunLoop.current.run(until: NSDate.init(timeIntervalSinceNow: 0.01) as Date)
         XCTAssertEqual(eventFinger5, eventCallback(proxy: CGEventTapProxy(bitPattern: 1)!, type: eventFinger5.type, event: eventFinger5, refcon: nil)?.takeUnretainedValue())
         
-        RunLoop.current.run(until: NSDate.init(timeIntervalSinceNow: 0.11) as Date)
+        RunLoop.current.run(until: NSDate.init(timeIntervalSinceNow: 0.21) as Date)
         XCTAssertEqual(0, MockCGEvent.events.count)
     }
     
@@ -422,7 +425,7 @@ class EventLoopEventCallBackTests: XCTestCase {
         RunLoop.current.run(until: NSDate.init(timeIntervalSinceNow: 0.01) as Date)
         XCTAssertNil(eventCallback(proxy: CGEventTapProxy(bitPattern: 1)!, type: eventFinger4.type, event: eventFinger4, refcon: nil)?.takeUnretainedValue())
         
-        RunLoop.current.run(until: NSDate.init(timeIntervalSinceNow: 0.11) as Date)
+        RunLoop.current.run(until: NSDate.init(timeIntervalSinceNow: 0.21) as Date)
         checkKeyEvent()
     }
 }
