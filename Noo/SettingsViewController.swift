@@ -8,8 +8,10 @@
 
 import Cocoa
 
-class SettingsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextViewDelegate {
+class SettingsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextViewDelegate, NSWindowDelegate {
     
+    var blinkingId: Int = 0
+    var instructionView: NSStackView
     var scrollView: NSScrollView
     var tableView: NSTableView
     var originColumn: NSTableColumn
@@ -19,7 +21,7 @@ class SettingsViewController: NSViewController, NSTableViewDataSource, NSTableVi
         "finger-3": "3-finger touch",
         "finger-4": "4-finger touch",
         "finger-5": "5-finger touch",
-        "mouse-button-right": "Right mouse button",
+        "mouse-button-right": "Mouse right button",
         "mouse-button-2": "Mouse button 2",
         "mouse-button-3": "Mouse button 3",
         "mouse-button-4": "Mouse button 4",
@@ -32,10 +34,23 @@ class SettingsViewController: NSViewController, NSTableViewDataSource, NSTableVi
     init() {
         scrollView = NSScrollView()
         tableView = NSTableView()
+        instructionView = NSStackView()
         originColumn = NSTableColumn(identifier: NSUserInterfaceItemIdentifier("Origin"))
         shortcutColumn = NSTableColumn(identifier: NSUserInterfaceItemIdentifier("Shortcut"))
-        
         super.init(nibName: nil, bundle: nil)
+
+        instructionView.edgeInsets = NSEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
+        instructionView.orientation = .vertical
+        instructionView.alignment = .centerX
+        instructionView.wantsLayer = true
+
+        let instructionText = NSTextField()
+        instructionText.isBezeled = false
+        instructionText.drawsBackground = false
+        instructionText.isEditable = false
+        instructionText.isSelectable = true
+        instructionText.stringValue = "Click the button to identify its button number"
+        instructionView.addArrangedSubview(instructionText)
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.setContentCompressionResistancePriority(NSLayoutConstraint.Priority.required, for: NSLayoutConstraint.Orientation.horizontal)
@@ -69,14 +84,58 @@ class SettingsViewController: NSViewController, NSTableViewDataSource, NSTableVi
         tableView.dataSource = self;
         tableView.delegate = self;
         
-        originColumn.title = "Origin"
+        originColumn.title = "Action"
         originColumn.width = 130
         originColumn.headerCell.alignment = NSTextAlignment.center
-        shortcutColumn.title = "Shortcut"
+        shortcutColumn.title = "Key combination"
         shortcutColumn.headerCell.alignment = NSTextAlignment.center
         
         tableView.addTableColumn(originColumn)
         tableView.addTableColumn(shortcutColumn)
+    }
+    
+    func gestured(_ id: String) {
+        var rowIndex = -1
+        
+        for i in 0...(Config.IDS.count - 1) {
+            if id == Config.IDS[i] {
+                rowIndex = i
+                break
+            }
+        }
+        
+        if (rowIndex == -1) {
+            return
+        }
+        
+        let view = tableView.view(atColumn: 0, row: rowIndex, makeIfNecessary: false)
+        
+        if (view != nil) {
+            blinkingId += 1
+            animateBlinking(view!, id: blinkingId, visible: false, count: 4)
+        }
+    }
+    
+    func animateBlinking(_ view: NSView, id: Int, visible: Bool, count: Int) {
+        if (blinkingId != id) {
+            view.alphaValue = 1.0
+            return
+        }
+        
+        if (count <= 0) { return }
+        
+        NSAnimationContext.runAnimationGroup({ (context) in
+            context.duration = 0.125
+            view.animator().alphaValue = visible ? 1.0 : 0.0
+            
+        }, completionHandler:{
+            self.animateBlinking(view, id: id, visible: !visible, count: count - 1)
+        })
+    }
+    
+    @objc func windowShouldClose(_ sender: NSWindow) -> Bool {
+        NSApp.setActivationPolicy(.accessory)
+        return false
     }
     
     required init?(coder: NSCoder) {
@@ -85,11 +144,17 @@ class SettingsViewController: NSViewController, NSTableViewDataSource, NSTableVi
     
     override func loadView() {
         self.view = NSView(frame: NSRect.init(x: 0, y: 0, width: 480, height: 10))
-        self.view.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(scrollView)
+        self.view.becomeFirstResponder()
+        let view = NSStackView(views: [instructionView, scrollView])
+        view.alignment = .centerX
+        view.orientation = .vertical
+        view.setCustomSpacing(0.0, after: instructionView)
         
-        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[scroll]-0-|", options: [], metrics: nil, views: ["scroll": scrollView]))
-        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[scroll]-0-|", options: [], metrics: nil, views: ["scroll": scrollView]))
+        self.view.addSubview(view)
+        self.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[view]-0-|", options: [], metrics: nil, views: ["view": view]))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[view]-0-|", options: [], metrics: nil, views: ["view": view]))
         
         self.view.setContentCompressionResistancePriority(NSLayoutConstraint.Priority.required, for: NSLayoutConstraint.Orientation.horizontal)
         self.view.setContentCompressionResistancePriority(NSLayoutConstraint.Priority.required, for: NSLayoutConstraint.Orientation.vertical)
