@@ -47,26 +47,30 @@ func eventCallback(proxy: CGEventTapProxy, type: CGEventType, event: CGEvent, re
     if (nsEvent.type == NSEvent.EventType.gesture) {
         let latestTouchCount = nsEvent.touches(matching: NSTouch.Phase.stationary, in: nil).count
         
-        if (currentFingerCount < latestTouchCount) {
+        if (currentFingerCount < latestTouchCount && latestTouchCount >= 3) {
             currentFingerCount = latestTouchCount;
 
             let id = "finger-\(latestTouchCount)"
             
-            AppDelegate.controller.gestured(id)
-            
-            if (respondTo(id)) {
+            if (
+                respondTo(id) ||
+                NSApplication.shared.keyWindow?.contentViewController == AppDelegate.controller // the window is in focused
+            ) {
                 if let _ = timer?.isValid {
                     timer?.invalidate()
                 }
                 
                 latestTimerId += 1
                 let timerId = latestTimerId;
-                timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false, block: { (_: Timer) in
+                timer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false, block: { (_: Timer) in
                     if (timerId != latestTimerId) { return; }
                     
                     if (currentFingerCount == latestTouchCount) {
+                        AppDelegate.controller.gestured(id)
                         
-                        trigger("finger-\(currentFingerCount)")
+                        if (respondTo(id)) {
+                            trigger("finger-\(currentFingerCount)")
+                        }
                     }
                     
                     currentFingerCount = 0;
