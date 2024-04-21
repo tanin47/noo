@@ -95,6 +95,8 @@ class SettingsViewController: NSViewController, NSTableViewDataSource, NSTableVi
     }
     
     func gestured(_ id: String) {
+        if (NSApplication.shared.keyWindow?.contentViewController != self) { return }
+        
         var rowIndex = -1
         
         for i in 0...(Config.IDS.count - 1) {
@@ -133,9 +135,8 @@ class SettingsViewController: NSViewController, NSTableViewDataSource, NSTableVi
         })
     }
     
-    @objc func windowShouldClose(_ sender: NSWindow) -> Bool {
+    @objc func windowWillClose(_ notification: Notification) {
         NSApp.setActivationPolicy(.accessory)
-        return false
     }
     
     required init?(coder: NSCoder) {
