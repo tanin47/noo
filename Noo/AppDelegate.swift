@@ -75,7 +75,17 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         
         if eventTap == nil {
             NSLog("Unable to invoke CGEvent.tapCreate. Please enable Accessibility for Noo.app");
-//            NSApp.terminate(nil)
+            let alert = NSAlert()
+            alert.messageText = "Accessibility is off"
+            alert.informativeText = "Please grant Accessibility and start Noo again."
+            alert.alertStyle = .warning
+            alert.addButton(withTitle: "Open the Accessibility setting and quit Noo")
+            alert.runModal()
+            
+            let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility")!
+            NSWorkspace.shared.open(url)
+            
+            NSApp.terminate(nil)
             return
         }
         

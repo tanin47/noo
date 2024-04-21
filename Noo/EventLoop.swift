@@ -20,6 +20,23 @@ public var NSWorkspaceClass: NSWorkspace.Type = NSWorkspace.self
 public var NSEventClass: NooNSEventBase.Type = NooNSEvent.self
 
 func eventCallback(proxy: CGEventTapProxy, type: CGEventType, event: CGEvent, refcon: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
+    let accessibilityEnabled = AXIsProcessTrustedWithOptions([kAXTrustedCheckOptionPrompt.takeRetainedValue() as NSString: false] as NSDictionary);
+    
+    if (!accessibilityEnabled) {
+        CGEventClass.tapEnable(tap: eventTap!, enable: false)
+        CFRunLoopRemoveSource(CFRunLoopGetCurrent(), eventLoop!, CFRunLoopMode.commonModes)
+        
+        let alert = NSAlert()
+        alert.messageText = "Accessibility has been turned off"
+        alert.informativeText = "Noo will quit. Please grant Accessibility and start Noo again."
+        alert.alertStyle = .warning
+        alert.addButton(withTitle: "Quit Noo")
+        alert.runModal()
+        NSApp.terminate(nil)
+        
+        return Unmanaged.passUnretained(event)
+    }
+    
     if (type == CGEventType.tapDisabledByTimeout) {
         CGEventClass.tapEnable(tap: eventTap!, enable: true)
         return Unmanaged.passUnretained(event)
@@ -34,6 +51,9 @@ func eventCallback(proxy: CGEventTapProxy, type: CGEventType, event: CGEvent, re
             currentFingerCount = latestTouchCount;
 
             let id = "finger-\(latestTouchCount)"
+            
+            AppDelegate.controller.gestured(id)
+            
             if (respondTo(id)) {
                 if let _ = timer?.isValid {
                     timer?.invalidate()
@@ -65,6 +85,11 @@ func eventCallback(proxy: CGEventTapProxy, type: CGEventType, event: CGEvent, re
 
     if (nsEvent.type == NSEvent.EventType.rightMouseUp || nsEvent.type == NSEvent.EventType.rightMouseDown) {
         let id = "mouse-button-right"
+        
+        if (nsEvent.type == NSEvent.EventType.rightMouseDown) {
+            AppDelegate.controller.gestured(id)
+        }
+        
         if respondTo(id) {
             if (nsEvent.type == NSEvent.EventType.rightMouseUp) {
                 trigger(id)
@@ -75,6 +100,11 @@ func eventCallback(proxy: CGEventTapProxy, type: CGEventType, event: CGEvent, re
 
     if (nsEvent.type == NSEvent.EventType.otherMouseUp || nsEvent.type == NSEvent.EventType.otherMouseDown) {
         let id = "mouse-button-\(nsEvent.buttonNumber)"
+        
+        if (nsEvent.type == NSEvent.EventType.otherMouseDown) {
+            AppDelegate.controller.gestured(id)
+        }
+        
         if respondTo(id) {
             if (nsEvent.type == NSEvent.EventType.otherMouseUp) {
                 trigger(id)
@@ -88,7 +118,7 @@ func eventCallback(proxy: CGEventTapProxy, type: CGEventType, event: CGEvent, re
 
 func respondTo(_ id: String) -> Bool {
     let gestureOpt = AppDelegate.CONFIG.gestures[id]
-    AppDelegate.controller.gestured(id)
+    
     if (gestureOpt == nil) { return false }
     let gesture = gestureOpt!
     

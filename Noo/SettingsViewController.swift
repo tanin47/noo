@@ -10,7 +10,8 @@ import Cocoa
 
 class SettingsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextViewDelegate, NSWindowDelegate {
     
-    var accessibilityWarningView: NSStackView
+    var blinkingId: Int = 0
+    var instructionView: NSStackView
     var scrollView: NSScrollView
     var tableView: NSTableView
     var originColumn: NSTableColumn
@@ -33,31 +34,23 @@ class SettingsViewController: NSViewController, NSTableViewDataSource, NSTableVi
     init() {
         scrollView = NSScrollView()
         tableView = NSTableView()
-        accessibilityWarningView = NSStackView()
+        instructionView = NSStackView()
         originColumn = NSTableColumn(identifier: NSUserInterfaceItemIdentifier("Origin"))
         shortcutColumn = NSTableColumn(identifier: NSUserInterfaceItemIdentifier("Shortcut"))
         super.init(nibName: nil, bundle: nil)
 
-        let accessibilityWarningText = NSTextField()
-        accessibilityWarningView.edgeInsets = NSEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
-        accessibilityWarningView.orientation = .vertical
-        accessibilityWarningView.alignment = .centerX
-        accessibilityWarningView.wantsLayer = true
-        accessibilityWarningView.layer?.backgroundColor = NSColor(red: 0.8627, green: 0.2078, blue: 0.2705, alpha: 1.0).cgColor
-    
-        accessibilityWarningText.textColor = NSColor.white
-        accessibilityWarningText.isBezeled = false
-        accessibilityWarningText.drawsBackground = false
-        accessibilityWarningText.isEditable = false
-        accessibilityWarningText.isSelectable = true
-        accessibilityWarningText.stringValue = "You must grant Accessibility to Noo."
-        accessibilityWarningView.addArrangedSubview(accessibilityWarningText)
-        
-        let accessibilityWarningButton = NSButton(
-            title: "Click to open the Accessibility setting", target: self, action: #selector(onAccessibilityWarningButtonClicked))
-        accessibilityWarningButton.setButtonType(NSButton.ButtonType.momentaryLight)
-        accessibilityWarningButton.appearance = NSAppearance(named: .aqua)
-        accessibilityWarningView.addArrangedSubview(accessibilityWarningButton)
+        instructionView.edgeInsets = NSEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
+        instructionView.orientation = .vertical
+        instructionView.alignment = .centerX
+        instructionView.wantsLayer = true
+
+        let instructionText = NSTextField()
+        instructionText.isBezeled = false
+        instructionText.drawsBackground = false
+        instructionText.isEditable = false
+        instructionText.isSelectable = true
+        instructionText.stringValue = "Click the button to identify its button number"
+        instructionView.addArrangedSubview(instructionText)
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.setContentCompressionResistancePriority(NSLayoutConstraint.Priority.required, for: NSLayoutConstraint.Orientation.horizontal)
@@ -91,7 +84,7 @@ class SettingsViewController: NSViewController, NSTableViewDataSource, NSTableVi
         tableView.dataSource = self;
         tableView.delegate = self;
         
-        originColumn.title = "Gesture"
+        originColumn.title = "Action"
         originColumn.width = 130
         originColumn.headerCell.alignment = NSTextAlignment.center
         shortcutColumn.title = "Key combination"
@@ -102,16 +95,44 @@ class SettingsViewController: NSViewController, NSTableViewDataSource, NSTableVi
     }
     
     func gestured(_ id: String) {
-        NSLog("Gestured: %@", id)
+        var rowIndex = -1
+        
+        for i in 0...(Config.IDS.count - 1) {
+            if id == Config.IDS[i] {
+                rowIndex = i
+                break
+            }
+        }
+        
+        if (rowIndex == -1) {
+            return
+        }
+        
+        let view = tableView.view(atColumn: 0, row: rowIndex, makeIfNecessary: false)
+        
+        if (view != nil) {
+            blinkingId += 1
+            animateBlinking(view!, id: blinkingId, visible: false, count: 4)
+        }
     }
     
-    @objc func onAccessibilityWarningButtonClicked() {
-        let accessibilityEnabled = AXIsProcessTrustedWithOptions([kAXTrustedCheckOptionPrompt.takeRetainedValue() as NSString: true] as NSDictionary);
-        NSLog("Noo can access Accessibility: %@", accessibilityEnabled ? "true" : "false");
-        let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility")!
-        NSWorkspace.shared.open(url)
+    func animateBlinking(_ view: NSView, id: Int, visible: Bool, count: Int) {
+        if (blinkingId != id) {
+            view.alphaValue = 1.0
+            return
+        }
+        
+        if (count <= 0) { return }
+        
+        NSAnimationContext.runAnimationGroup({ (context) in
+            context.duration = 0.125
+            view.animator().alphaValue = visible ? 1.0 : 0.0
+            
+        }, completionHandler:{
+            self.animateBlinking(view, id: id, visible: !visible, count: count - 1)
+        })
     }
-
+    
     @objc func windowShouldClose(_ sender: NSWindow) -> Bool {
         NSApp.setActivationPolicy(.accessory)
         return false
@@ -124,18 +145,15 @@ class SettingsViewController: NSViewController, NSTableViewDataSource, NSTableVi
     override func loadView() {
         self.view = NSView(frame: NSRect.init(x: 0, y: 0, width: 480, height: 10))
         self.view.becomeFirstResponder()
-        let view = NSStackView(views: [accessibilityWarningView, scrollView])
+        let view = NSStackView(views: [instructionView, scrollView])
         view.alignment = .centerX
         view.orientation = .vertical
-        view.setCustomSpacing(0.0, after: accessibilityWarningView)
+        view.setCustomSpacing(0.0, after: instructionView)
         
         self.view.addSubview(view)
         self.view.translatesAutoresizingMaskIntoConstraints = false
-//        self.view.addSubview(accessibilityWarningView)
-//        self.view.addSubview(scrollView)
         
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[view]-0-|", options: [], metrics: nil, views: ["view": view]))
-//        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[warning]-0-|", options: [], metrics: nil, views: ["warning": accessibilityWarningView]))
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[view]-0-|", options: [], metrics: nil, views: ["view": view]))
         
         self.view.setContentCompressionResistancePriority(NSLayoutConstraint.Priority.required, for: NSLayoutConstraint.Orientation.horizontal)
