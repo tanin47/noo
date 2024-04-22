@@ -50,8 +50,8 @@ class EventLoopTriggerTests: XCTestCase {
             MockCGEvent.events.map({ e in e.virtualKey })
         )
         XCTAssertEqual(
-            [1234, 1234],
-            MockCGEvent.events.map({ e in e.pid })
+            [true, true],
+            MockCGEvent.events.map({ e in e.posted })
         )
         
         let down = MockCGEvent.events[0];
@@ -85,8 +85,8 @@ class EventLoopTriggerTests: XCTestCase {
             MockCGEvent.events.map({ e in e.virtualKey })
         )
         XCTAssertEqual(
-            [1234, 1234],
-            MockCGEvent.events.map({ e in e.pid })
+            [true, true],
+            MockCGEvent.events.map({ e in e.posted })
         )
         
         let down = MockCGEvent.events[0];
@@ -121,8 +121,8 @@ class EventLoopTriggerTests: XCTestCase {
             MockCGEvent.events.map({ e in e.virtualKey })
         )
         XCTAssertEqual(
-            [1234, 1234],
-            MockCGEvent.events.map({ e in e.pid })
+            [true, true],
+            MockCGEvent.events.map({ e in e.posted })
         )
         
         let down = MockCGEvent.events[0];
@@ -158,8 +158,8 @@ class EventLoopTriggerTests: XCTestCase {
             MockCGEvent.events.map({ e in e.virtualKey })
         )
         XCTAssertEqual(
-            [1234, 1234],
-            MockCGEvent.events.map({ e in e.pid })
+            [true, true],
+            MockCGEvent.events.map({ e in e.posted })
         )
         
         let down = MockCGEvent.events[0];

@@ -11,7 +11,7 @@ import Cocoa
 public protocol NooCGEventBase {
     init(virtualKey: Int, keyDown: Bool);
     func addFlag(_ flag: CGEventFlags);
-    func postToPid(_ pid: pid_t);
+    func post();
     static func tapEnable(tap: CFMachPort, enable: Bool);
 }
 
@@ -25,8 +25,8 @@ class NooCGEvent: NooCGEventBase {
         event.flags.insert(flag)
     }
     
-    func postToPid(_ pid: pid_t) {
-        event.postToPid(pid)
+    func post() {
+        event.post(tap: .cghidEventTap)
     }
     
     static func tapEnable(tap: CFMachPort, enable: Bool) {

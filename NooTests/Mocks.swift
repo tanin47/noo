@@ -14,7 +14,7 @@ class MockCGEvent: NooCGEventBase {
     var virtualKey: Int?;
     var keyDown: Bool?;
     var flags: CGEventFlags = CGEventFlags();
-    var pid: pid_t?;
+    var posted: Bool = false;
     static var tapEnableInvoked: (tap: CFMachPort, enable: Bool)?
     
     static func clear() {
@@ -32,8 +32,8 @@ class MockCGEvent: NooCGEventBase {
         flags.insert(flag)
     }
     
-    func postToPid(_ pid: pid_t) {
-        self.pid = pid
+    func post() {
+        self.posted = true
     }
     
     static func tapEnable(tap: CFMachPort, enable: Bool) {

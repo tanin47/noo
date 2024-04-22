@@ -147,7 +147,7 @@ func trigger(_ id: String) {
         down.addFlag(CGEventFlags.maskCommand)
         up.addFlag(CGEventFlags.maskCommand)
     }
-    
+
     if gesture.ctrl {
         down.addFlag(CGEventFlags.maskControl)
         up.addFlag(CGEventFlags.maskControl)
@@ -157,13 +157,12 @@ func trigger(_ id: String) {
         down.addFlag(CGEventFlags.maskAlternate)
         up.addFlag(CGEventFlags.maskAlternate)
     }
-    
+   
     if gesture.shift {
         down.addFlag(CGEventFlags.maskShift)
         up.addFlag(CGEventFlags.maskShift)
     }
     
-    let runningApp = NSWorkspaceClass.shared.frontmostApplication!
-    down.postToPid(runningApp.processIdentifier)
-    up.postToPid(runningApp.processIdentifier)
+    down.post()
+    up.post()
 }

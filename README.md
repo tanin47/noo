@@ -26,6 +26,15 @@ You can install it from the Mac App Store: https://apps.apple.com/us/app/noo-mou
 
 Noo needs access to the accessbility feature. You can grant it under "Security & Privacy".
 
+Testing
+--------
+
+- Test Ctrl + Up Arrow for Mission Control
+- Test Option + C that types ç
+- Test Cmd + C that copies text
+- Test Shift + C that types C
+- Test touchpad for 3 fingers
+
 
 Questions?
 -----------
