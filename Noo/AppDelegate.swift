@@ -110,7 +110,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         item.menu!.addItem(NSMenuItem.separator())
         item.menu!.addItem(withTitle: "Quit", action: #selector(terminate), keyEquivalent: "")
         statusItem = item
-        showSettings()
     }
     
     func applicationDidBecomeActive(_ notification: Notification) {
@@ -122,5 +121,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         setupStatusItem()
         setupEventLoop()
+        
+        let event = NSAppleEventManager.shared().currentAppleEvent
+        let launchedAsLogInItem =
+            event?.eventID == kAEOpenApplication &&
+            event?.paramDescriptor(forKeyword: keyAEPropData)?.enumCodeValue == keyAELaunchedAsLogInItem
+        
+        if (!launchedAsLogInItem) {
+            showSettings()
+        }
     }
 }
