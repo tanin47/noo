@@ -92,11 +92,12 @@ func eventCallback(proxy: CGEventTapProxy, type: CGEventType, event: CGEvent, re
         
         if (nsEvent.type == NSEvent.EventType.rightMouseDown) {
             AppDelegate.controller.gestured(id)
+            trigger(id)
         }
         
         if respondTo(id) {
             if (nsEvent.type == NSEvent.EventType.rightMouseUp) {
-                trigger(id)
+                // Do nothing because we fire event at the mouse down.
             }
             return nil;
         }
@@ -107,11 +108,12 @@ func eventCallback(proxy: CGEventTapProxy, type: CGEventType, event: CGEvent, re
         
         if (nsEvent.type == NSEvent.EventType.otherMouseDown) {
             AppDelegate.controller.gestured(id)
+            trigger(id)
         }
         
         if respondTo(id) {
             if (nsEvent.type == NSEvent.EventType.otherMouseUp) {
-                trigger(id)
+                // Do nothing because we fire event at the mouse down.
             }
             return nil;
         }
